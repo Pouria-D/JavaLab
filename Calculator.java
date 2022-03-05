@@ -1,13 +1,19 @@
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Calculator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // start the program and continue till user enter "quit"
 
+        // set of operations
+        Set<String> operations = new HashSet<>(Arrays.asList("add","subtract","multiply","divide"));
+
+        // start the program and continue till user enter "quit"
         while (true){
             String operation = scanner.next();
-            if (operation.equals("equals"))
+            if (operation.equals("quit"))
                 break;
             else if (operation.equals("prime")){
                 int n = scanner.nextInt();
@@ -16,7 +22,7 @@ public class Calculator {
                 else
                     System.out.println(false);
                 printPrime(n);
-            }else {
+            }else if (operations.contains(operation)){
                 // get inputs and calculate the result in output
                 double x= scanner.nextDouble();
                 double y= scanner.nextDouble();
@@ -46,8 +52,8 @@ public class Calculator {
                         System.out.println("Invalid input!");
                 }
                 System.out.println(output);
-            }
-
+            } else
+                System.out.println("Invalid input!");
         }
     }
     // function check whether a number is prime or not
@@ -58,7 +64,7 @@ public class Calculator {
             return false;
 
         // Check from 2 to n-1
-        for (int i = 2; i * i <= n; i++)
+        for (int i = 2; i * i < n; i++)
             if (n % i == 0)
                 return false;
 
