@@ -271,7 +271,7 @@ public class Management {
                 if (course.getCode() == code){
                     student.removeCourse(course);
                     course.removeStudent(student);
-                    System.out.println("You were added successfully");
+                    System.out.println("You were deleted successfully");
                     flag = 1;
                 }
             }
