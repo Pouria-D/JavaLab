@@ -22,6 +22,10 @@ class Course{
     public String getName() {
         return name;
     }
+    
+    public String getTeacherName() {
+        return teacher.getName();
+    }
 
     public List<Double> getScores() {
         return scores;
