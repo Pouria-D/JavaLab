@@ -220,13 +220,15 @@ public class Management {
             int flag = 0;
 
             outlook:
-            for (Course course : teacher.getCourses())
-                for (Student student : course.getStudents()){
-                    if (student.getStudentID() == studentID) {
-                        student.printInformation();
-                        break outlook;
-                    }
+            for (Student student : AllStudents){
+                if (student.getStudentID() == studentID) {
+                    flag = 1;
+                    student.printInformation();
+                    break outlook;
                 }
+            }
+            if (flag == 0)
+                System.out.println("There's no student with this Student ID.");
         }
         else if (operation.equalsIgnoreCase("ChangePass")){
             System.out.println("Enter current Password:");
