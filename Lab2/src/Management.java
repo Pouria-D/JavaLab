@@ -200,15 +200,19 @@ public class Management {
                 }
             }
             if (flag == 1){
-                for (Student student: course.getStudents()){
-                    int index = course.getStudents().indexOf(student);
-                    System.out.println("Student Name:" + student.getName() + "\n Current Score:" + course.getScores().get(index));
-                    System.out.println("New Score:");
-                    course.setScore(index, scanner.nextDouble());
+                if (course.getTeacherName() == teacher.getName()){
+                    for (Student student: course.getStudents()){
+                        int index = course.getStudents().indexOf(student);
+                        System.out.println("Student Name:" + student.getName() + "\n Current Score:" + course.getScores().get(index));
+                        System.out.println("New Score:");
+                        course.setScore(index, scanner.nextDouble());
+                    }
                 }
+                else
+                    System.out.println("You don't have this course.");    
             }
             else
-                System.out.println("You don't have this course");
+                System.out.println("There's no course with this code.");
         }
         else if (operation.equalsIgnoreCase("StudentProfile")){
             System.out.println("Enter the Student ID");
