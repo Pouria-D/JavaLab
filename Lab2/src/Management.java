@@ -70,7 +70,7 @@ public class Management {
                             }
                         }
                         if (flag == 1){
-                            System.out.println("Welcom to Dr" + student.getName() + " Portal \n you can do these actions by typing them : \n" +
+                            System.out.println("Welcom to " + student.getName() + " Portal \n you can do these actions by typing them : \n" +
                                     "Add and delete courses \n see your profile \n calculate your average \n see course Information" +
                                     "Now type the action that you want to do");
                             String operation = scanner.next();
