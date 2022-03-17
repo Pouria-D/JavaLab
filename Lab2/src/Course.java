@@ -64,8 +64,8 @@ class Course{
     }
     void removeStudent(Student student){
         if (students.contains(student)) {
-            students.remove(student);
             scores.remove(students.indexOf(student));
+            students.remove(student);
         }
         else
             System.out.println("This student doesn't have this course");
