@@ -13,66 +13,28 @@ public class Test
         System.out.println(u2.getOutDegree());*/
 
         /*//https://www.researchgate.net/profile/Peter-Sutovsky/publication/282261082/figure/fig3/AS:511944786677760@1499068556942/Example-of-directed-tree.png
-        Node A = new Node();
-        Node B = new Node();
-        Node C = new Node();
-        Node D = new Node();
-        Node E = new Node();
-        Node F = new Node();
-        Node G = new Node();
-        Node H = new Node();
-        Node I = new Node();
-        Node J = new Node();
-        Node K = new Node();
         Tree T = new Tree();
-        T.addNode(A);
-        T.addNode(B);
-        T.addNode(C);
-        T.addNode(D);
-        T.addNode(E);
-        T.addNode(F);
-        T.addNode(G);
-        T.addNode(H);
-        T.addNode(I);
-        T.addNode(J);
-        T.addNode(K);
-        DirectedEdge AB = new DirectedEdge(A, B);
-        DirectedEdge AC = new DirectedEdge(A, C);
-        DirectedEdge AD = new DirectedEdge(A, D);
-        DirectedEdge BE = new DirectedEdge(B, E);
-        DirectedEdge BF = new DirectedEdge(B, F);
-        DirectedEdge CG = new DirectedEdge(C, G);
-        DirectedEdge CH = new DirectedEdge(C, H);
-        DirectedEdge CI = new DirectedEdge(C, I);
-        DirectedEdge HJ = new DirectedEdge(H, J);
-        DirectedEdge HK = new DirectedEdge(H, K);
-        T.addEdge(AB);
-        T.addEdge(AC);
-        T.addEdge(AD);
-        T.addEdge(BE);
-        T.addEdge(BF);
-        T.addEdge(CG);
-        T.addEdge(CH);
-        T.addEdge(CI);
-        T.addEdge(HJ);
-        T.addEdge(HK);
-        System.out.println(A.getInDegree() + " " + A.getOutDegree());
-        System.out.println(B.getInDegree() + " " + B.getOutDegree());
-        System.out.println(C.getInDegree() + " " + C.getOutDegree());
-        System.out.println(D.getInDegree() + " " + D.getOutDegree());
-        System.out.println(E.getInDegree() + " " + E.getOutDegree());
-        System.out.println(F.getInDegree() + " " + F.getOutDegree());
-        System.out.println(G.getInDegree() + " " + G.getOutDegree());
-        System.out.println(H.getInDegree() + " " + H.getOutDegree());
-        System.out.println(I.getInDegree() + " " + I.getOutDegree());
-        System.out.println(J.getInDegree() + " " + J.getOutDegree());
-        System.out.println(K.getInDegree() + " " + K.getOutDegree());*/
+        Node A, B, C, D, E, F, G, H, I, J, K;
+        T.addEdge(new DirectedEdge(A = new Node(), B = new Node()));
+        T.addEdge(new DirectedEdge(A, C = new Node()));
+        T.addEdge(new DirectedEdge(A, D = new Node()));
+        T.addEdge(new DirectedEdge(B, E = new Node()));
+        T.addEdge(new DirectedEdge(B, F = new Node()));
+        T.addEdge(new DirectedEdge(C, G = new Node()));
+        T.addEdge(new DirectedEdge(C, H = new Node()));
+        T.addEdge(new DirectedEdge(C, I = new Node()));
+        T.addEdge(new DirectedEdge(H, J = new Node()));
+        T.addEdge(new DirectedEdge(H, K = new Node()));
+        for (int i = 0; i < T.V.length; i++)
+            System.out.println(T.V[i].getInDegree() + " " + T.V[i].getOutDegree());*/
         
         /*//data:image/png;base64,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
         DirectedGraph DG = new DirectedGraph();
         for (int i = 0; i < 9; i++)
             DG.addNode(new Node());
         DG.addEdge(new DirectedEdge(DG.V[7], DG.V[4]));
+        DG.addEdge(new DirectedEdge(DG.V[4], DG.V[4]));
+        DG.addEdge(new DirectedEdge(DG.V[4], DG.V[4]));
         DG.addEdge(new DirectedEdge(DG.V[8], DG.V[0]));
         DG.addEdge(new DirectedEdge(DG.V[2], DG.V[0]));
         DG.addEdge(new DirectedEdge(DG.V[0], DG.V[6]));
@@ -98,11 +60,12 @@ public class Test
         T.addEdge(new DirectedEdge(T.V[4], T.V[8]));
         T.addEdge(new DirectedEdge(T.V[4], T.V[9]));*/
         /*//InDegrees and OutDegrees
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < T.V.length; i++)
             System.out.println(T.V[i].getInDegree() + " " + T.V[i].getOutDegree());*/
         /*//Children
         for (int i = 0; i < T.V.length; i++)
         {
+            System.out.print(i + ": ");
             Node[] tmp = T.getChildren(T.V[i]);
             for (int k = 0; k < T.V.length; k++)
                 for (int j = 0; j < tmp.length; j++)
@@ -116,6 +79,7 @@ public class Test
         /*//Ancestors
         for (int i = 0; i < T.V.length; i++)
         {
+            System.out.print(i + ": ");
             Node[] tmp = T.getAncestors(T.V[i]);
             for (int j = 0; j < tmp.length; j++)
                 for (int k = 0; k < T.V.length; k++)
@@ -163,11 +127,15 @@ public class Test
         T.addEdge(new DirectedEdge(T.V[4], T.V[6]));
         T.addEdge(new DirectedEdge(T.V[4], T.V[7]));*/
         /*//InDegrees and OutDegrees
-        for (int i = 0; i < 9; i++)
-            System.out.println(T.V[i].getInDegree() + " " + T.V[i].getOutDegree());*/
+        for (int i = 0; i < T.V.length; i++)
+        {
+            System.out.print(i + 1 + ": ");
+            System.out.println(T.V[i].getInDegree() + " " + T.V[i].getOutDegree());
+        }*/
         /*//Children
         for (int i = 0; i < T.V.length; i++)
         {
+            System.out.print(i + 1 + ": ");
             Node[] tmp = T.getChildren(T.V[i]);
             for (int k = 0; k < T.V.length; k++)
                 for (int j = 0; j < tmp.length; j++)
@@ -181,6 +149,7 @@ public class Test
         /*//Ancestors
         for (int i = 0; i < T.V.length; i++)
         {
+            System.out.print(i + 1 + ": ");
             Node[] tmp = T.getAncestors(T.V[i]);
             for (int j = 0; j < tmp.length; j++)
                 for (int k = 0; k < T.V.length; k++)
@@ -189,8 +158,7 @@ public class Test
                         System.out.print(k + 1 + " ");
                         break;
                     }
-            if (i + 1 != T.V.length)
-                System.out.println();
+            System.out.println();
         }*/
         /*//Paths
         for (int i = 0; i < T.V.length; i++)

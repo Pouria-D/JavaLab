@@ -18,7 +18,8 @@ public class DirectedEdge extends Edge
         V[0] = input0;
         V[1] = input1;
         input0.addEdge(this);
-        input1.addEdge(this);
+        if (input1 != input0)
+            input1.addEdge(this);
     }
     
     Node[] getNodes()

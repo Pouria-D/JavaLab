@@ -7,10 +7,7 @@ public class Tree extends DirectedGraph
             if (E[i].V[1] == e.V[1])
                 cnt++;
         if (cnt == 1  ||  e.V[0] == e.V[1])
-        {
-            System.out.println("This edge can not be added to the tree.");
             return;
-        }
         super.addEdge(e);
     }
 
@@ -51,16 +48,15 @@ public class Tree extends DirectedGraph
     Edge[] getPath(Node input0, Node input1)
     {
         Node[] tmp1 = getAncestors(input0);
-        if (tmp1 != null)
-            for (int i = 0; i < tmp1.length; i++)
-                if (tmp1[i] == input1)
-                {
-                    Edge[] tmp2 = getPath(input1, input0);
-                    Edge[] res = new Edge[tmp2.length];
-                    for (int j = 0; j < tmp2.length; j++)
-                        res[j] = tmp2[tmp2.length - 1 - j];
-                    return res;
-                }
+        for (int i = 0; i < tmp1.length; i++)
+            if (tmp1[i] == input1)
+            {
+                Edge[] tmp2 = getPath(input1, input0);
+                Edge[] res = new Edge[tmp2.length];
+                for (int j = 0; j < tmp2.length; j++)
+                    res[j] = tmp2[tmp2.length - 1 - j];
+                return res;
+            }
         tmp1 = getAncestors(input1);
         for (int i = 0; i < tmp1.length; i++)
             if (tmp1[i] == input0)

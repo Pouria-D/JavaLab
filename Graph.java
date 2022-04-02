@@ -17,6 +17,10 @@ public class Graph
 
     void addEdge(Edge e)
     {
+        for (int i = 0; i < E.length; i++)
+            if (E[i] == e)
+                return;
+
         Edge[] tmp = new Edge[E.length + 1];
         for (int i = 0; i < E.length; i++)
             tmp[i] = E[i];
@@ -50,6 +54,7 @@ public class Graph
                 for (int j = i + 1; j < E.length; j++)
                     tmp[j - 1] = E[j];
                 E = tmp;
+                break;
             }
         if (p)
         {
@@ -74,7 +79,7 @@ public class Graph
         {
             Node tmp2 = input.E[i].V[0];
             if (tmp2 == input)
-            tmp2 = input.E[i].V[1];
+                tmp2 = input.E[i].V[1];
             boolean p = false;
             for (int j = 0; j < V.length; j++)
                 if (V[j] == tmp2)
@@ -85,7 +90,6 @@ public class Graph
             if (p)
                 addEdge(input.E[i]);
         }
-
     }
 
     void deleteNode(Node input)
@@ -107,7 +111,7 @@ public class Graph
         for (int i = E.length - 1; i >= 0; i--)
             if (E[i].V[0] == input  ||  E[i].V[1] == input)
             {
-                Edge[] tmp = E.length - 1;
+                Edge[] tmp = new Edge[E.length - 1];
                 for (int j = 0; j < i; j++)
                     tmp[j] = E[j];
                 for (int j = i + 1; j < E.length; j++)
