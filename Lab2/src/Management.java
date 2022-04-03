@@ -5,10 +5,41 @@ import java.util.Scanner;
 public class Management {
     static List<Student> AllStudents = new ArrayList<>();
     static List<Teacher> AllTeachers = new ArrayList<>();
-    static List<Course> Allcourses = new ArrayList<>();
+    static List<Course> AllCourses = new ArrayList<>();
 
     public static void main(String[] args) {
+        Initialize();
         CLI();
+    }
+
+    public static void Initialize(){
+        Teacher teacher = new Teacher("Fatemi", "12340","12345");
+        Teacher teacher1 = new Teacher("Fanai", "12341","12345");
+        Teacher teacher2 = new Teacher("Naebi","12342","12345");
+        AllTeachers.add(teacher);AllTeachers.add(teacher1);AllTeachers.add(teacher2);
+
+        Course course = new Course("Statistics",25000,3,teacher2,"Electric");
+        Course course1 = new Course("Learning",25001,3,teacher,"computer");
+        Course course2 = new Course("Math1",22000,4,teacher1,"Math");
+        AllCourses.add(course);
+        AllCourses.add(course1);
+        AllCourses.add(course2);
+
+        Student student = new Student(96106485,"Pouria","Dadkhah","1272974421","Electric");
+        Student student1 = new Student(96106486,"Ali","Hoseini","1270000000","Computer");
+        Student student2 = new Student(96106487,"Reza", "zarei","1270000001","Math");
+        Student student3 = new Student(96106488, "Danial", "Ehsani", "1270000002","Physics");
+        Student student4 = new Student(96106489,"Mohammad", "Karimi", "1270000003","Electric");
+        Student student5 = new Student(96106490, "Hosein", "Kiani", "1270000004", "Computer");
+        AllStudents.add(student);AllStudents.add(student1);AllStudents.add(student2);AllStudents.add(student3);
+        AllStudents.add(student4);AllStudents.add(student5);
+
+        student.addCourse(course);student.addCourse(course1);student.addCourse(course2);
+        student1.addCourse(course1);student1.addCourse(course2);
+        student2.addCourse(course);student2.addCourse(course1);
+        student3.addCourse(course1);student3.addCourse(course);
+        student4.addCourse(course2);
+        student5.addCourse(course1);
     }
 
     public static void CLI(){
@@ -41,16 +72,17 @@ public class Management {
                             System.out.println("Username or Password is wrong Try logging on again");
                         break;
                     case "2":
-                        Teacher teacher = AllTeachers.get(0);
+                        Teacher teacher = new Teacher("","","");
                         int flag = 0;
                         for (Teacher teacher1 : AllTeachers) {
                             if (teacher1.getUsername().equals(username) && teacher1.getPassword().equals(password)){
                                 teacher = teacher1;
                                 flag = 1;
+                                break;
                             }
                         }
                         if (flag == 1){
-                            System.out.println("Welcom to Dr" + teacher.getName() + " Portal \n you can do these actions by typing them : \n" +
+                            System.out.println("Welcom to Dr." + teacher.getName() + " Portal \n you can do these actions by typing them : \n" +
                                     "Give students of your course's grade \n watch your student's profile \n change your password \n " +
                                     "Now type the action that you want to do");
                             String operation = scanner.next();
@@ -61,12 +93,13 @@ public class Management {
 
                         break;
                     case "3":
-                        Student student = AllStudents.get(0);
+                        Student student = new Student(0,"","","","");
                         flag = 0;
                         for (Student student1 : AllStudents) {
                             if (student1.getStudentID() == Integer.parseInt(username) && student1.getNationalID().equals(password)){
                                 student = student1;
                                 flag = 1;
+                                break;
                             }
                         }
                         if (flag == 1){
@@ -140,17 +173,18 @@ public class Management {
                 System.out.println("Teacher's Name:");
                 while (true) {
                     String teacherName = scanner.next();
-                    Teacher teacher1 = AllTeachers.get(0);
+                    Teacher teacher1 = new Teacher("","","");
                     int flag = 0;
                     for (Teacher teacher2 : AllTeachers) {
                         if (teacher2.getName().equals(teacherName)) {
                             teacher1 = teacher2;
                             flag = 1;
+                            break;
                         }
                     }
                     if (flag == 1) {
                         Course course = new Course(name, code, unit, teacher1, department);
-                        Allcourses.add(course);
+                        AllCourses.add(course);
                         teacher1.addCourse(course);
                         System.out.println("Course added successfully \n if you're done type \" exit \" else type your next operation");
                         break;
@@ -162,7 +196,7 @@ public class Management {
             case "DeleteCourse":
                 System.out.println("Enter the Course Name");
                 name = scanner.next();
-                Allcourses.removeIf(course1 -> course1.getName().equals(name));
+                AllCourses.removeIf(course1 -> course1.getName().equals(name));
                 System.out.println("If the was such a course it's gone!");
                 break;
             case "PrintStudents":
@@ -174,8 +208,9 @@ public class Management {
                     System.out.println(teacher1.getName());
                 break;
             case "PrintCourses":
-                for (Course course : Allcourses)
+                for (Course course : AllCourses)
                     System.out.println(course.getName());
+                break;
             case "Exit":
                 return;
             default:
@@ -192,27 +227,25 @@ public class Management {
             System.out.println("Enter the course code");
             int code = scanner.nextInt();
             int flag = 0;
-            Course course = Allcourses.get(0);
-            for (Course course1 : Allcourses){
+            Course course = new Course("",0,0,teacher,"");
+            for (Course course1 : teacher.getCourses()){
                 if (course1.getCode() == code){
                     course = course1;
                     flag = 1;
+                    break;
                 }
             }
             if (flag == 1){
-                if (course.getTeacherName() == teacher.getName()){
-                    for (Student student: course.getStudents()){
-                        int index = course.getStudents().indexOf(student);
-                        System.out.println("Student Name:" + student.getName() + "\n Current Score:" + course.getScores().get(index));
-                        System.out.println("New Score:");
-                        course.setScore(index, scanner.nextDouble());
-                    }
+                for (Student student: course.getStudents()){
+                    int index = course.getStudents().indexOf(student);
+                    System.out.println("Student Name:" + student.getName() + "\n Current Score:" + course.getScores().get(index));
+                    System.out.println("New Score:");
+                    course.setScore(index, scanner.nextDouble());
                 }
-                else
-                    System.out.println("You don't have this course.");    
+                System.out.println("End Of Students!");
             }
             else
-                System.out.println("There's no course with this code.");
+                System.out.println("You don't have this course");
         }
         else if (operation.equalsIgnoreCase("StudentProfile")){
             System.out.println("Enter the Student ID");
@@ -220,15 +253,16 @@ public class Management {
             int flag = 0;
 
             outlook:
-            for (Student student : AllStudents){
-                if (student.getStudentID() == studentID) {
-                    flag = 1;
-                    student.printInformation();
-                    break outlook;
+            for (Course course : teacher.getCourses())
+                for (Student student : course.getStudents()){
+                    if (student.getStudentID() == studentID) {
+                        student.printInformation();
+                        flag = 1;
+                        break outlook;
+                    }
                 }
-            }
             if (flag == 0)
-                System.out.println("There's no student with this Student ID.");
+                System.out.println("You don't have this student");
         }
         else if (operation.equalsIgnoreCase("ChangePass")){
             System.out.println("Enter current Password:");
@@ -246,6 +280,8 @@ public class Management {
         }
         else if (operation.equalsIgnoreCase("Exit"))
             return;
+        else
+            System.out.println("Invalid Operation");
 
         operation = scanner.next();
         teacherCLI(teacher, operation);
@@ -258,12 +294,12 @@ public class Management {
             System.out.println("Enter Course code:");
             int code = scanner.nextInt();
             int flag = 0;
-            for (Course course : Allcourses){
+            for (Course course : AllCourses){
                 if (course.getCode() == code){
                     student.addCourse(course);
-                    course.addStudent(student);
                     System.out.println("You were added successfully");
                     flag = 1;
+                    break;
                 }
             }
             if (flag == 0)
@@ -276,9 +312,9 @@ public class Management {
             for (Course course : student.getCourses()){
                 if (course.getCode() == code){
                     student.removeCourse(course);
-                    course.removeStudent(student);
-                    System.out.println("You were deleted successfully");
+                    System.out.println("You were Deleted successfully");
                     flag = 1;
+                    break;
                 }
             }
             if (flag == 0)
@@ -291,7 +327,7 @@ public class Management {
             System.out.println("Enter the course name:");
             String courseName = scanner.next();
             int flag = 0;
-            for (Course course : Allcourses){
+            for (Course course : AllCourses){
                 if (course.getName().equals(courseName)) {
                     course.printInformation();
                     flag = 1;
@@ -303,6 +339,9 @@ public class Management {
         }
         else if (operation.equalsIgnoreCase("Average")){
             System.out.println("Your Average is:" + student.calculateAverage());
+        }
+        else if (operation.equalsIgnoreCase("CourseList")){
+            System.out.println("You have registered in these courses:\n" + student.getCourses());
         }
         else if (operation.equalsIgnoreCase("Exit"))
             return;

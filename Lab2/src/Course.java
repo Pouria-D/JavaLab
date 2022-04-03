@@ -16,15 +16,12 @@ class Course{
         this.code = code;
         this.unit = unit;
         this.teacher = teacher;
+        teacher.addCourse(this);
         this.department = department;
     }
 
     public String getName() {
         return name;
-    }
-    
-    public String getTeacherName() {
-        return teacher.getName();
     }
 
     public List<Double> getScores() {
@@ -70,6 +67,7 @@ class Course{
         if (students.contains(student)) {
             scores.remove(students.indexOf(student));
             students.remove(student);
+
         }
         else
             System.out.println("This student doesn't have this course");

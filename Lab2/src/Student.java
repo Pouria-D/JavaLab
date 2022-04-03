@@ -50,13 +50,17 @@ class Student{
     void addCourse(Course course){
         if (courses.contains(course))
             System.out.println("Already Have this course!");
-        else
+        else {
+            course.addStudent(this);
             courses.add(course);
+        }
     }
 
     void removeCourse(Course course){
-        if (courses.contains(course))
+        if (courses.contains(course)) {
             courses.remove(course);
+            course.removeStudent(this);
+        }
         else
             System.out.println("You don't have this course!");
     }
@@ -64,12 +68,16 @@ class Student{
     double calculateAverage(){
         double average;
         double sum = 0.0;
-        int number = courses.size();
+        int number = 0;
         for (Course course : courses){
             for (Student student : course.getStudents())
                 if (student.getStudentID() == studentID){
                     int index = course.getStudents().indexOf(student);
-                    sum += course.getScores().get(index);
+                    double score = course.getScores().get(index);
+                    if (score != 0.0) {
+                        sum += score;
+                        number += 1;
+                    }
                     break;
                 }
         }
