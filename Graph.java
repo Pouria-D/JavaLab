@@ -98,7 +98,7 @@ public class Graph
         {
             if (V[i] == input)
             {
-                tmp = new Node[V.length - 1];
+                Node[] tmp = new Node[V.length - 1];
                 for (int j = 0; j < i; j++)
                     tmp[j] = V[j];
                 for (int j = i + 1; j < V.length; j++)
