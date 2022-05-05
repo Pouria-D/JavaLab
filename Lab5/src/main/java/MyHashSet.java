@@ -1,14 +1,4 @@
 
-/* Copyright (c), AnkitMittal  JavaMadeSoEasy.com */
-/*
- * @author AnkitMittal
- * Copyright (c), AnkitMittal . All Contents are copyrighted and must not be reproduced in any form.
- * This class provides custom implementation of HashSet(without using java api's- we will be using HashMapCustom)- which allows does not allow you to store duplicate values.
- * Note- implementation does not allow you to store null values.
- * does not maintain insertion order.
- * @param <K>
- * @param <V>
- */
 class MyHashSet<E>{
 
 
