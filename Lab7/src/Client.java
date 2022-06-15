@@ -3,6 +3,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Client
 {
@@ -10,6 +11,7 @@ public class Client
 
     public static void main(String args[]) throws UnknownHostException, IOException
     {
+
         Scanner scn = new Scanner(System.in);
 
         // getting localhost ip
@@ -17,10 +19,10 @@ public class Client
 
         // establish the connection
         Socket s = new Socket(ip, ServerPort);
-
         // obtaining input and out streams
         DataInputStream dis = new DataInputStream(s.getInputStream());
         DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
 
         // sendMessage thread
         Thread sendMessage = new Thread(new Runnable()
@@ -38,6 +40,7 @@ public class Client
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             }
         });
@@ -54,8 +57,8 @@ public class Client
                         String msg = dis.readUTF();
                         System.out.println(msg);
                     } catch (IOException e) {
-
-                        e.printStackTrace();
+                        System.out.println("Good luck");
+                        break;
                     }
                 }
             }
@@ -63,6 +66,7 @@ public class Client
 
         sendMessage.start();
         readMessage.start();
+
 
     }
 }
